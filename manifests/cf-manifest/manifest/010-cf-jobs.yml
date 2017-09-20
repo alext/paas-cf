@@ -150,6 +150,8 @@ meta:
     release: (( grab meta.release.name ))
   - name: statsd_injector
     release: (( grab meta.release.name ))
+  - name: route_registrar
+    release: cf
   - name: nginx
     release: nginx
 
@@ -247,6 +249,22 @@ jobs:
     networks:
       - name: cf
     properties:
+      route_registrar:
+        routes:
+          - name: uaa
+            port: (( grab properties.uaa.port ))
+            registration_interval: 4s
+            tags:
+              component: uaa
+            uris:
+            - (( concat "uaa." properties.system_domain ))
+            - (( concat "*.uaa." properties.system_domain ))
+            - (( concat "login." properties.system_domain ))
+            - (( concat "*.login." properties.system_domain ))
+            health_check:
+              name: uaa-healthcheck
+              script_path: /var/vcap/jobs/uaa/bin/health_check
+
       nginx_conf: |
         worker_processes  2;
         error_log syslog:server=127.0.0.1,severity=error,tag=uaa_nginx_error error;
