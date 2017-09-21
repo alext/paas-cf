@@ -49,7 +49,7 @@ resource "aws_elb" "cf_uaa" {
   cross_zone_load_balancing = "true"
 
   security_groups = [
-    "${aws_security_group.web.id}",
+    "${aws_security_group.cf_api_elb.id}",
   ]
 
   access_logs {
