@@ -243,7 +243,6 @@ jobs:
     instances: 2
     vm_type: medium
     vm_extensions:
-      - cf_uaa_elb
       - cf_rds_client_sg
     stemcell: default
     networks:
@@ -378,6 +377,8 @@ jobs:
     templates: (( grab meta.router_templates ))
     instances: 2
     vm_type: router
+    vm_extensions:
+      - cf_uaa_elb
     stemcell: default
     networks:
       - name: router
