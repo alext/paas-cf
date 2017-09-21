@@ -68,9 +68,9 @@ resource "aws_elb" "cf_uaa" {
 
   listener {
     instance_port      = 443
-    instance_protocol  = "https"
+    instance_protocol  = "ssl"
     lb_port            = 443
-    lb_protocol        = "https"
+    lb_protocol        = "ssl"
     ssl_certificate_id = "${var.system_domain_cert_arn}"
   }
 }
@@ -84,13 +84,6 @@ resource "aws_lb_ssl_negotiation_policy" "cf_uaa" {
     name  = "Reference-Security-Policy"
     value = "${var.default_elb_security_policy}"
   }
-}
-
-resource "aws_app_cookie_stickiness_policy" "cf_uaa" {
-  name          = "cf-uaa"
-  load_balancer = "${aws_elb.cf_uaa.id}"
-  lb_port       = 443
-  cookie_name   = "JSESSIONID"
 }
 
 resource "aws_elb" "cf_doppler" {
