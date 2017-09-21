@@ -67,7 +67,7 @@ resource "aws_elb" "cf_uaa" {
   }
 
   listener {
-    instance_port      = 9443
+    instance_port      = 443
     instance_protocol  = "https"
     lb_port            = 443
     lb_protocol        = "https"
