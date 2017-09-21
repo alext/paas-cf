@@ -251,7 +251,7 @@ jobs:
       route_registrar:
         routes:
           - name: uaa
-            port: (( grab properties.uaa.port ))
+            port: 9443
             registration_interval: 4s
             tags:
               component: uaa
@@ -377,8 +377,6 @@ jobs:
     templates: (( grab meta.router_templates ))
     instances: 2
     vm_type: router
-    vm_extensions:
-      - cf_uaa_elb
     stemcell: default
     networks:
       - name: router
