@@ -1,10 +1,9 @@
 RSpec.describe "uaa jobs" do
-
   let(:jobs) { manifest_with_defaults.fetch("jobs") }
 
   describe "common job properties" do
     context "job uaa" do
-      subject(:job) { jobs.find {|j| j["name"] == "uaa" } }
+      subject(:job) { jobs.find { |j| j["name"] == "uaa" } }
 
       describe "route registrar" do
         let(:routes) { job.fetch("properties").fetch("route_registrar").fetch("routes") }
