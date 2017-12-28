@@ -308,6 +308,28 @@ jobs:
                 "$(pwd)/git-ssh-private-key/git_id_rsa" \
                 "((pipeline_name))" lock
 
+      - task: remove-codecommit
+        config:
+          platform: linux
+          image_resource:
+            type: docker-image
+            source:
+              repository: governmentpaas/awscli
+              tag: 895cf6752c8ec64af05a3a735186b90acd3db65a
+          inputs:
+            - name: paas-cf
+          params:
+            DEPLOY_ENV: ((deploy_env))
+            AWS_DEFAULT_REGION: us-east-1
+          run:
+            path: sh
+            args:
+            - -e
+            - -c
+            - |
+              aws codecommit delete-repository --repository-name concourse-pool-andrew
+              aws codecommit delete-repository --repository-name concourse-pool-andrewbuild
+
       - try:
           task: lock-the-pipeline
           config:
