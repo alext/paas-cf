@@ -115,6 +115,7 @@ staging: globals ## Set Environment to Staging
 	$(eval export DEPLOY_ENV=staging)
 	$(eval export TEST_HEAVY_LOAD=true)
 	$(eval export COMPOSE_PASSWORD_STORE_HIGH_DIR?=${HOME}/.paas-pass-high)
+	$(eval export AWS_DEFAULT_REGION=eu-west-1)
 	@true
 
 .PHONY: stg-lon
@@ -132,6 +133,7 @@ stg-lon: globals ## Set Environment to stg-lon
 	$(eval export DEPLOY_ENV=stg-lon)
 	$(eval export TEST_HEAVY_LOAD=true)
 	$(eval export COMPOSE_PASSWORD_STORE_HIGH_DIR?=${HOME}/.paas-pass-high)
+	$(eval export AWS_DEFAULT_REGION=eu-west-2)
 	@true
 
 .PHONY: prod
@@ -149,6 +151,7 @@ prod: globals ## Set Environment to Production
 	$(eval export ENABLE_DATADOG=true)
 	$(eval export DEPLOY_ENV=prod)
 	$(eval export COMPOSE_PASSWORD_STORE_HIGH_DIR?=${HOME}/.paas-pass-high)
+	$(eval export AWS_DEFAULT_REGION=eu-west-1)
 	@true
 
 .PHONY: prod-lon
@@ -166,6 +169,7 @@ prod-lon: globals ## Set Environment to prod-lon
 	$(eval export ENABLE_DATADOG=true)
 	$(eval export DEPLOY_ENV=prod-lon)
 	$(eval export COMPOSE_PASSWORD_STORE_HIGH_DIR?=${HOME}/.paas-pass-high)
+	$(eval export AWS_DEFAULT_REGION=eu-west-2)
 	@true
 
 .PHONY: bosh-cli
