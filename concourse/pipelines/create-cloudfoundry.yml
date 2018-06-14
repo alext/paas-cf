@@ -432,7 +432,7 @@ jobs:
           params:
             DEPLOY_ENV: ((deploy_env))
             BRANCH: ((branch_name))
-            AWS_ACCOUNT: ((aws_account))
+            MAKEFILE_TARGET: ((makefile_target))
             AWS_DEFAULT_REGION: ((aws_region))
             SELF_UPDATE_PIPELINE: ((self_update_pipeline))
             PIPELINES_TO_UPDATE: ((pipeline_name))

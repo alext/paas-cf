@@ -84,6 +84,7 @@ globals:
 .PHONY: dev
 dev: globals ## Set Environment to DEV
 	$(eval export AWS_ACCOUNT=dev)
+	$(eval export MAKEFILE_TARGET=dev)
 	$(eval export PERSISTENT_ENVIRONMENT=false)
 	$(eval export ENABLE_DESTROY=true)
 	$(eval export ENABLE_AUTODELETE=true)
@@ -103,6 +104,7 @@ dev: globals ## Set Environment to DEV
 .PHONY: staging
 staging: globals ## Set Environment to Staging
 	$(eval export AWS_ACCOUNT=staging)
+	$(eval export MAKEFILE_TARGET=staging)
 	$(eval export PERSISTENT_ENVIRONMENT=true)
 	$(eval export ENABLE_AUTO_DEPLOY=true)
 	$(eval export TAG_PREFIX=prod-)
@@ -121,6 +123,7 @@ staging: globals ## Set Environment to Staging
 .PHONY: stg-lon
 stg-lon: globals ## Set Environment to stg-lon
 	$(eval export AWS_ACCOUNT=staging)
+	$(eval export MAKEFILE_TARGET=stg-lon)
 	$(eval export PERSISTENT_ENVIRONMENT=true)
 	$(eval export ENABLE_AUTO_DEPLOY=true)
 	$(eval export TAG_PREFIX=prod-lon-)
@@ -139,6 +142,7 @@ stg-lon: globals ## Set Environment to stg-lon
 .PHONY: prod
 prod: globals ## Set Environment to Production
 	$(eval export AWS_ACCOUNT=prod)
+	$(eval export MAKEFILE_TARGET=prod)
 	$(eval export PERSISTENT_ENVIRONMENT=true)
 	$(eval export ENABLE_AUTO_DEPLOY=true)
 	$(eval export PAAS_CF_TAG_FILTER=prod-*)
@@ -157,6 +161,7 @@ prod: globals ## Set Environment to Production
 .PHONY: prod-lon
 prod-lon: globals ## Set Environment to prod-lon
 	$(eval export AWS_ACCOUNT=prod)
+	$(eval export MAKEFILE_TARGET=prod-lon)
 	$(eval export PERSISTENT_ENVIRONMENT=true)
 	$(eval export ENABLE_AUTO_DEPLOY=true)
 	$(eval export PAAS_CF_TAG_FILTER=prod-lon-*)
