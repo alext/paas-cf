@@ -49,9 +49,9 @@
   path: /releases/-
   value:
     name: rds-broker
-    version: 0.1.27
-    url: https://s3-eu-west-1.amazonaws.com/gds-paas-build-releases/rds-broker-0.1.27.tgz
-    sha1: 17c6ae4825225292c24760ac8ec47f104fe986ed
+    version: 0.0.1528983790
+    url: https://s3-eu-west-1.amazonaws.com/gds-paas-build-releases/rds-broker-0.0.1528983790.tgz
+    sha1: 995915cc0362fb8f6a942f04ff6a8b79f4066fe2
 
 - type: replace
   path: /addons/name=metron_agent/exclude/jobs/-
