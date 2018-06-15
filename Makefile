@@ -7,7 +7,6 @@ help:
 DEPLOY_ENV_MAX_LENGTH=8
 DEPLOY_ENV_VALID_LENGTH=$(shell if [ $$(printf "%s" $(DEPLOY_ENV) | wc -c) -gt $(DEPLOY_ENV_MAX_LENGTH) ]; then echo ""; else echo "OK"; fi)
 DEPLOY_ENV_VALID_CHARS=$(shell if echo $(DEPLOY_ENV) | grep -q '^[a-zA-Z0-9-]*$$'; then echo "OK"; else echo ""; fi)
-AWS_DEFAULT_REGION ?= eu-west-1
 
 check-env:
 	$(if ${DEPLOY_ENV},,$(error Must pass DEPLOY_ENV=<name>))
@@ -77,12 +76,12 @@ list_merge_keys: ## List all GPG keys allowed to sign merge commits.
 .PHONY: globals
 PASSWORD_STORE_DIR?=${HOME}/.paas-pass
 globals:
-	$(eval export AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION})
 	$(eval export PASSWORD_STORE_DIR=${PASSWORD_STORE_DIR})
 	@true
 
 .PHONY: dev
 dev: globals ## Set Environment to DEV
+	$(eval export AWS_DEFAULT_REGION ?= eu-west-1)
 	$(eval export AWS_ACCOUNT=dev)
 	$(eval export MAKEFILE_TARGET=dev)
 	$(eval export PERSISTENT_ENVIRONMENT=false)
