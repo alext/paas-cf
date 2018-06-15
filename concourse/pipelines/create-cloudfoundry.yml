@@ -352,7 +352,7 @@ resources:
     type: git
     source:
       uri: https://github.com/alphagov/paas-log-cache-adapter
-      tag_filter: v0.1.0
+      branch: deploy-log-cache-adapter-158353106
 
 jobs:
   - name: pipeline-lock
