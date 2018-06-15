@@ -220,7 +220,7 @@ upload-compose-secrets: check-env ## Decrypt and upload Compose credentials to S
 .PHONY: upload-google-oauth-secrets
 upload-google-oauth-secrets: check-env ## Decrypt and upload Google Admin Console credentials to S3
 	$(eval export OAUTH_PASSWORD_STORE_DIR?=${HOME}/.paas-pass)
-	$(if ${AWS_ACCOUNT},,$(error Must set environment to staging/prod))
+	$(if ${MAKEFILE_TARGET},,$(error Must set MAKEFILE_TARGET))
 	$(if ${OAUTH_PASSWORD_STORE_DIR},,$(error Must pass OAUTH_PASSWORD_STORE_DIR=<path_to_password_store>))
 	$(if $(wildcard ${OAUTH_PASSWORD_STORE_DIR}),,$(error Password store ${OAUTH_PASSWORD_STORE_DIR} does not exist))
 	@scripts/upload-google-oauth-secrets.sh
