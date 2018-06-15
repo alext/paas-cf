@@ -228,7 +228,7 @@ upload-google-oauth-secrets: check-env ## Decrypt and upload Google Admin Consol
 .PHONY: upload-notify-secrets
 upload-notify-secrets: check-env ## Decrypt and upload Notify Credentials to S3
 	$(eval export NOTIFY_PASSWORD_STORE_DIR?=${HOME}/.paas-pass)
-	$(if ${AWS_ACCOUNT},,$(error Must set environment))
+	$(if ${MAKEFILE_TARGET},,$(error Must set MAKEFILE_TARGET))
 	$(if ${NOTIFY_PASSWORD_STORE_DIR},,$(error Must pass NOTIFY_PASSWORD_STORE_DIR=<path_to_password_store>))
 	$(if $(wildcard ${NOTIFY_PASSWORD_STORE_DIR}),,$(error Password store ${NOTIFY_PASSWORD_STORE_DIR} does not exist))
 	@scripts/upload-notify-secrets.sh
