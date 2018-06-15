@@ -107,6 +107,23 @@ var _ = Describe("TagRelease", func() {
 			Expect(string(session.Out.Contents())).NotTo(ContainSubstring("next-0.0.42"))
 		})
 
+		It("ignores tags with extra stuff between the prefix and the version", func() {
+			runBashScript(baseCmd, `
+				cd origin_repo
+				git tag next-foo-0.0.40
+			`)
+			cloneRepository(baseCmd, "paas-cf")
+			runBashScript(baseCmd, `
+				./tag_release.sh next- test_aws_account test_env ""
+			`)
+
+			session := runBashScript(baseCmd, `
+				cd paas-cf
+				git tag -l "next-*"
+			`)
+			Expect(string(session.Out.Contents())).To(ContainSubstring("next-0.0.42"))
+		})
+
 		It("tags the HEAD revision of the checked out repo", func() {
 			cloneRepository(baseCmd, "paas-cf")
 			session := runBashScript(baseCmd, `
@@ -181,6 +198,26 @@ var _ = Describe("TagRelease", func() {
 			`)
 			Expect(string(session.Out.Contents())).To(ContainSubstring("next-0.0.2"))
 			Expect(string(session.Out.Contents())).NotTo(ContainSubstring("next-0.0.1"))
+		})
+
+		It("ignores tags with extra stuff between the prefix and the version", func() {
+			runBashScript(baseCmd, `
+				cd origin_repo
+				git tag previous-foo-0.0.5
+			`)
+
+			cloneRepository(baseCmd, "paas-cf")
+
+			runBashScript(baseCmd, `
+				./tag_release.sh next- test_aws_account test_env "previous-*"
+			`)
+
+			session := runBashScript(baseCmd, `
+				cd paas-cf
+				git tag -l "next-*"
+			`)
+			Expect(string(session.Out.Contents())).To(ContainSubstring("next-0.0.2"))
+			Expect(string(session.Out.Contents())).NotTo(ContainSubstring("next-0.0.5"))
 		})
 
 		It("promotes the tag pointing at the HEAD commit", func() {
