@@ -87,6 +87,8 @@ dev: globals ## Set Environment to DEV
 	$(eval export PERSISTENT_ENVIRONMENT=false)
 	$(eval export ENABLE_DESTROY=true)
 	$(eval export ENABLE_AUTODELETE=true)
+	$(eval export ENABLE_AUTO_DEPLOY=true)
+	$(eval export INPUT_TAG_PREFIX=alext-)
 	$(eval export SYSTEM_DNS_ZONE_NAME=${DEPLOY_ENV}.dev.cloudpipeline.digital)
 	$(eval export APPS_DNS_ZONE_NAME=${DEPLOY_ENV}.dev.cloudpipelineapps.digital)
 	$(eval export ALERT_EMAIL_ADDRESS=govpaas-alerting-dev@digital.cabinet-office.gov.uk)
