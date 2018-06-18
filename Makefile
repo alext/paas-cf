@@ -100,6 +100,7 @@ dev: globals ## Set Environment to DEV
 	$(eval export DISABLE_PIPELINE_LOCKING=true)
 	$(eval export TEST_HEAVY_LOAD=true)
 	$(eval export ENABLE_MORNING_DEPLOYMENT=true)
+	$(eval export DISABLE_CF_ACCEPTANCE_TESTS=true)
 	@true
 
 .PHONY: staging
